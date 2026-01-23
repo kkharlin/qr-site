@@ -1,0 +1,1197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>QuickRadiology - Radiology assistant: MRI, CT, X-ray and ultrasound</title>
+  <meta name="description" content="Report templates for MRI, CT, X-ray and ultrasound. Write reports 5-10x faster, keep quality high, and earn more with QuickRadiology.">
+  <link rel="icon" href="../favicon.ico" type="image/x-icon">
+  <style>
+    :root {
+      --primary: #1234d4;
+      --primary-dark: #071a78;
+      --accent: #0cc397;
+      --text: #0b1b32;
+      --text-muted: #5b6b7c;
+      --bg: #f6f8fb;
+      --white: #ffffff;
+      --border: #e3e8ef;
+      --shadow: 0 18px 48px rgba(10, 32, 85, 0.12);
+      --radius: 16px;
+    }
+
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    .container {
+      width: min(1180px, 100%);
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: linear-gradient(120deg, var(--primary-dark), #0e2079);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 0;
+      gap: 20px;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 700;
+      font-size: 19px;
+      color: var(--white);
+      letter-spacing: -0.01em;
+    }
+    .brand img {
+      height: 42px;
+      width: auto;
+      display: block;
+    }
+    .nav-links {
+      display: flex;
+      gap: 18px;
+      flex-wrap: wrap;
+      font-weight: 600;
+      color: rgba(255,255,255,0.85);
+    }
+    .nav-links a:hover { color: var(--white); }
+    .nav-cta {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 12px 18px;
+      border-radius: 12px;
+      border: 1px solid transparent;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      white-space: nowrap;
+    }
+    .btn-primary {
+      background: linear-gradient(120deg, var(--primary), var(--primary-dark));
+      color: var(--white);
+      box-shadow: var(--shadow);
+    }
+    .btn-primary:hover { transform: translateY(-1px); }
+    .btn-ghost {
+      background: transparent;
+      color: var(--white);
+      border-color: rgba(255, 255, 255, 0.6);
+    }
+
+    .nav-cta .btn-primary {
+      background: var(--white);
+      color: var(--primary-dark);
+      box-shadow:
+        0 0 0 1px rgba(255,255,255,0.4),
+        var(--shadow);
+    }
+    .nav-cta .btn-primary:hover {
+      transform: translateY(-1px);
+      filter: brightness(0.97);
+    }
+    .nav-cta .btn-ghost {
+      background: rgba(255,255,255,0.08);
+      border-color: rgba(255,255,255,0.9);
+    }
+
+    .hero {
+      padding: 96px 0 80px;
+      background: radial-gradient(circle at 10% 20%, rgba(31,94,255,0.15), transparent 32%),
+                  radial-gradient(circle at 80% 0%, rgba(12,195,151,0.14), transparent 35%),
+                  var(--white);
+      border-bottom: 1px solid var(--border);
+    }
+    .hero .container {
+      width: min(1400px, 100%);
+    }
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.6fr 1fr;
+      gap: 56px;
+      align-items: center;
+    }
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 12px;
+      background: rgba(12,195,151,0.12);
+      border-radius: 999px;
+      color: #0a5f47;
+      font-weight: 700;
+      letter-spacing: 0.01em;
+    }
+    h1 {
+      margin: 20px 0 18px;
+      font-size: clamp(30px, 5vw, 46px);
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+    }
+    .lead {
+      font-size: 18px;
+      color: var(--text-muted);
+      max-width: 640px;
+      margin-bottom: 28px;
+    }
+    .hero-actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin: 26px 0 16px;
+    }
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 14px;
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      color: var(--text-muted);
+      font-weight: 600;
+      margin-top: 10px;
+    }
+    .badge-row {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 12px;
+    }
+    .badge {
+      background: rgba(31,94,255,0.08);
+      color: var(--primary-dark);
+      padding: 6px 10px;
+      border-radius: 10px;
+      font-weight: 600;
+      font-size: 13px;
+    }
+
+    .glass {
+      background: rgba(255,255,255,0.82);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 22px;
+      overflow: visible;
+    }
+    .screenshot-wrapper {
+      overflow: visible;
+      margin: 0 -15% 18px;
+      width: 130%;
+    }
+    .screenshot {
+      width: 100%;
+      height: auto;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      box-shadow: 0 8px 24px rgba(10,32,85,0.1);
+      display: block;
+      cursor: zoom-in;
+    }
+    .image-modal {
+      position: fixed;
+      inset: 0;
+      background: rgba(5,12,32,0.85);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      padding: 24px;
+    }
+    .image-modal.active {
+      display: flex;
+    }
+    .image-modal img {
+      max-width: 96vw;
+      max-height: 92vh;
+      border-radius: 12px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.35);
+      background: #fff;
+    }
+    .image-modal-close {
+      position: absolute;
+      top: 16px;
+      right: 20px;
+      background: rgba(255,255,255,0.1);
+      color: #fff;
+      border: 1px solid rgba(255,255,255,0.2);
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      font-size: 26px;
+      line-height: 36px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .hero-card h3 { margin: 0 0 8px; font-size: 20px; }
+    .stat-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 14px;
+      margin-top: 12px;
+    }
+    .stat {
+      background: rgba(31,94,255,0.06);
+      border-radius: 12px;
+      padding: 14px;
+    }
+    .stat strong {
+      display: block;
+      font-size: 22px;
+      color: var(--primary-dark);
+    }
+    .stat span { color: var(--text-muted); font-weight: 600; }
+
+    section { padding: 64px 0; }
+    h2 {
+      font-size: clamp(26px, 3.4vw, 34px);
+      margin: 0 0 10px;
+    }
+    .section-desc {
+      color: var(--text-muted);
+      max-width: 760px;
+      margin-bottom: 32px;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 18px;
+    }
+    .cards-3x2 {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+    .card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 20px;
+      box-shadow: 0 10px 30px rgba(15, 44, 86, 0.08);
+    }
+    .card h3 { margin: 10px 0 8px; }
+    .card p { color: var(--text-muted); margin: 0; }
+    .icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 12px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(31,94,255,0.12);
+      color: var(--primary-dark);
+      font-weight: 800;
+    }
+
+    .reviews {
+      background: #f0f4ff;
+    }
+    .reviews-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 18px;
+    }
+    .review-card {
+      background: var(--white);
+      border-radius: var(--radius);
+      border: 1px solid rgba(31,94,255,0.12);
+      box-shadow: 0 12px 32px rgba(9,24,63,0.08);
+      padding: 20px 20px 18px;
+    }
+    .review-text {
+      color: var(--text-muted);
+      margin: 0 0 12px;
+      font-style: italic;
+    }
+    .review-author {
+      font-weight: 700;
+      margin-bottom: 2px;
+    }
+    .review-meta {
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    .clinics-strip {
+      background: var(--white);
+      border-radius: 18px;
+      border: 1px solid var(--border);
+      box-shadow: 0 14px 36px rgba(9,24,63,0.08);
+      padding: 18px 20px;
+    }
+    .clinics-strip-title {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text-muted);
+      margin-bottom: 12px;
+    }
+    .clinics-logos {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      gap: 18px;
+    }
+    .clinics-logos img {
+      height: 58px;
+      width: auto;
+      opacity: 0.9;
+      filter: grayscale(0.1);
+    }
+
+    .split {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+      align-items: center;
+    }
+    .list {
+      padding: 0;
+      margin: 0;
+      list-style: none;
+      display: grid;
+      gap: 12px;
+    }
+    .list li {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 14px 14px 14px 16px;
+      box-shadow: 0 10px 26px rgba(10,32,85,0.05);
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+    }
+    .list li strong { display: block; margin-bottom: 4px; }
+    .list .dot {
+      width: 12px; height: 12px; margin-top: 6px;
+      border-radius: 50%;
+      background: var(--accent);
+      flex-shrink: 0;
+    }
+
+    .templates-showcase {
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 24px;
+      margin-top: 40px;
+      align-items: start;
+    }
+    .template-card-featured {
+      background: var(--white);
+      border: 2px solid rgba(31,94,255,0.15);
+      border-radius: var(--radius);
+      padding: 28px;
+      box-shadow: 0 12px 36px rgba(15, 44, 86, 0.1);
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    .template-card-featured::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--primary), var(--accent));
+    }
+    .template-card-featured:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 16px 48px rgba(15, 44, 86, 0.15);
+      border-color: rgba(31,94,255,0.3);
+    }
+    .template-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 20px;
+    }
+    .template-number {
+      font-size: 48px;
+      font-weight: 800;
+      line-height: 1;
+      color: var(--primary-dark);
+      opacity: 0.15;
+      letter-spacing: -0.03em;
+      font-variant-numeric: tabular-nums;
+    }
+    .template-badge {
+      background: linear-gradient(135deg, var(--accent), #0aa87d);
+      color: var(--white);
+      padding: 6px 12px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      box-shadow: 0 4px 12px rgba(12,195,151,0.3);
+    }
+    .template-card-featured h3 {
+      margin: 0 0 10px;
+      font-size: 24px;
+      color: var(--text);
+      font-weight: 700;
+    }
+    .template-card-featured p {
+      margin: 0 0 16px;
+      color: var(--text-muted);
+      line-height: 1.7;
+      font-size: 15px;
+    }
+    .template-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .tag {
+      background: rgba(31,94,255,0.08);
+      color: var(--primary-dark);
+      padding: 6px 12px;
+      border-radius: 8px;
+      font-size: 12px;
+      font-weight: 600;
+      border: 1px solid rgba(31,94,255,0.15);
+    }
+    .templates-grid-compact {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
+    .template-card-compact {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 20px;
+      box-shadow: 0 8px 24px rgba(15, 44, 86, 0.06);
+      transition: all 0.25s ease;
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+    }
+    .template-card-compact:hover {
+      transform: translateX(4px);
+      box-shadow: 0 12px 32px rgba(15, 44, 86, 0.1);
+      border-color: rgba(31,94,255,0.2);
+    }
+    .template-number-small {
+      font-size: 32px;
+      font-weight: 800;
+      line-height: 1;
+      color: var(--primary-dark);
+      opacity: 0.12;
+      letter-spacing: -0.02em;
+      font-variant-numeric: tabular-nums;
+      flex-shrink: 0;
+      min-width: 48px;
+    }
+    .template-content {
+      flex: 1;
+    }
+    .template-card-compact h3 {
+      margin: 0 0 6px;
+      font-size: 18px;
+      color: var(--text);
+      font-weight: 700;
+    }
+    .template-card-compact p {
+      margin: 0;
+      color: var(--text-muted);
+      line-height: 1.6;
+      font-size: 14px;
+    }
+
+    .pricing {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      box-shadow: var(--shadow);
+      padding: 36px;
+      max-width: 420px;
+      min-height: 500px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .price {
+      font-size: 38px;
+      font-weight: 800;
+      margin: 6px 0 4px;
+      color: var(--primary-dark);
+      letter-spacing: -0.02em;
+    }
+    .price-note { color: var(--text-muted); margin-bottom: 18px; }
+    .price ul {
+      list-style: none;
+      padding: 0; margin: 0 0 18px;
+      display: grid; gap: 10px;
+    }
+    .price li {
+      display: flex; gap: 10px; align-items: flex-start;
+      color: var(--text);
+    }
+    .price li::before {
+      content: "\2713";
+      color: var(--accent);
+      font-weight: 800;
+    }
+
+    .faq {
+      display: grid;
+      gap: 12px;
+    }
+    .faq-item {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 14px 16px;
+      cursor: pointer;
+      box-shadow: 0 8px 20px rgba(10,32,85,0.06);
+    }
+    .faq-q {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      align-items: center;
+      font-weight: 700;
+    }
+    .faq-a {
+      max-height: 0;
+      overflow: hidden;
+      color: var(--text-muted);
+      transition: max-height 0.25s ease, margin-top 0.25s ease;
+      margin-top: 0;
+    }
+    .faq-item.active .faq-a {
+      max-height: 320px;
+      margin-top: 8px;
+    }
+    .faq-toggle { color: var(--primary); font-weight: 900; }
+
+    .cta {
+      background: linear-gradient(120deg, #0c1f47, #0b317a);
+      color: var(--white);
+      border-radius: 20px;
+      padding: 32px;
+      box-shadow: var(--shadow);
+      text-align: center;
+    }
+    .cta p { color: rgba(255,255,255,0.9); }
+    .cta-actions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-top: 18px; }
+
+    .cta .btn-primary {
+      background: linear-gradient(135deg, #e8f2ff, #d4f5ed);
+      color: #051026;
+      box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+      padding-inline: 28px;
+      font-size: 16px;
+    }
+    .cta .btn-primary:hover {
+      transform: translateY(-2px);
+      filter: brightness(1.02);
+    }
+    .cta .btn-ghost {
+      background: rgba(255,255,255,0.1);
+      border-color: rgba(255,255,255,0.95);
+      color: #ffffff;
+      padding-inline: 24px;
+      font-size: 15px;
+    }
+    .cta .btn-ghost:hover {
+      background: rgba(255,255,255,0.18);
+      transform: translateY(-1px);
+    }
+
+    .legal {
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 18px;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+    .legal strong { color: var(--text); }
+
+    footer {
+      background: transparent;
+      padding: 40px 0 32px;
+      font-size: 14px;
+    }
+    .footer-inner {
+      background: radial-gradient(circle at 0 0, rgba(12,195,151,0.12), transparent 55%),
+                  radial-gradient(circle at 100% 20%, rgba(18,52,212,0.12), transparent 55%),
+                  var(--white);
+      border-radius: 22px;
+      border: 1px solid var(--border);
+      box-shadow: 0 18px 44px rgba(10,32,85,0.12);
+      padding: 26px 24px 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 2fr) repeat(2, minmax(0, 1.2fr));
+      gap: 22px;
+      align-items: start;
+    }
+    .footer-brand {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .footer-brand-main {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .footer-brand-main img {
+      height: 40px;
+      width: auto;
+      display: block;
+    }
+    .footer-title {
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      color: var(--text);
+    }
+    .footer-tagline {
+      color: var(--text-muted);
+      max-width: 320px;
+    }
+    .footer-links-group h4 {
+      margin: 0 0 8px;
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-muted);
+    }
+    .footer-links-group ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: grid;
+      gap: 6px;
+    }
+    .footer-links-group a {
+      color: var(--text);
+      text-decoration: none;
+      font-weight: 500;
+    }
+    .footer-links-group a:hover {
+      color: var(--primary-dark);
+    }
+    .footer-social {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 6px;
+    }
+    .footer-social a {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(18,52,212,0.06);
+      border: 1px solid rgba(18,52,212,0.14);
+      color: var(--primary-dark);
+      font-weight: 600;
+      font-size: 13px;
+    }
+    .footer-social a:hover {
+      background: rgba(18,52,212,0.12);
+      transform: translateY(-1px);
+    }
+    .footer-social img {
+      width: 18px;
+      height: 18px;
+      display: block;
+    }
+    .footer-bottom {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 10px;
+      padding-top: 10px;
+      border-top: 1px solid rgba(227,232,239,0.8);
+      color: var(--text-muted);
+      font-size: 12px;
+    }
+    .footer-bottom a {
+      color: var(--text-muted);
+      text-decoration: none;
+    }
+    .footer-bottom a:hover {
+      color: var(--primary-dark);
+    }
+
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      header { position: static; }
+      .hero { padding-top: 64px; padding-bottom: 64px; }
+      .hero-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+      .btn { width: 100%; justify-content: center; }
+      .hero-actions { flex-direction: column; }
+      .cards-3x2 {
+        grid-template-columns: minmax(0, 1fr);
+      }
+      .templates-showcase {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+      .template-card-featured {
+        padding: 24px;
+      }
+      .template-card-compact {
+        padding: 18px;
+      }
+    }
+  </style>
+  <!-- Yandex.Metrika counter -->
+
+  <script type="text/javascript" >
+      (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+      (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+
+      ym(62748202, "init", {
+        clickmap:true,
+        trackLinks:true,
+        accurateTrackBounce:true,
+        webvisor:true
+      });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/62748202" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+</head>
+<body>
+  <header>
+    <div class="container nav">
+      <div class="brand">
+        <img src="../qr_logo_2_white.png" alt="QuickRadiology logo">
+        <span>QuickRadiology</span>
+      </div>
+      <div class="nav-links">
+        <a href="#benefits">Benefits</a>
+        <a href="#templates">Templates</a>
+        <a href="#how">How it works</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#faq">FAQ</a>
+      </div>
+      <div class="nav-cta">
+        <a class="btn btn-primary" href="https://client.quickradiology.com" target="_blank" rel="noopener">Try for free</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container hero-grid">
+        <div>
+          <div class="eyebrow">Radiologist assistant &middot; MRI, CT, X-ray, ultrasound</div>
+          <h1>Write MRI, CT, X-ray and ultrasound reports 5-10x faster</h1>
+          <p class="lead">QuickRadiology is a report builder for MRI, CT, X-ray and ultrasound. Professional MRI templates, protocols for other modalities, instant library search, export to Word/PDF and encrypted cloud storage.</p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="https://client.quickradiology.com" target="_blank" rel="noopener">Start 14-day trial</a>
+          </div>
+          <div class="badge-row">
+            <span class="badge">No installation - works in the browser</span>
+            <span class="badge">Access from any clinic or home</span>
+            <span class="badge">Built with practicing radiologists</span>
+          </div>
+        </div>
+        <div class="glass hero-card">
+          <h3>What you get</h3>
+          <p class="lead" style="font-size:16px; margin: 10px 0 16px;">Replace manual typing with ready blocks and smart search. Plain text &rarr; Word/PDF &rarr; to the patient or RIS.</p>
+          <div class="stat-grid">
+            <div class="stat">
+              <strong>5-10x</strong>
+              <span>faster report writing</span>
+            </div>
+            <div class="stat">
+              <strong>600+</strong>
+              <span>parameters in MRI protocols</span>
+            </div>
+            <div class="stat">
+              <strong>14 days</strong>
+              <span>free trial</span>
+            </div>
+            <div class="stat">
+              <strong>24/7</strong>
+              <span>access to reports</span>
+            </div>
+          </div>
+          <div class="pill">Impact: +30% throughput, less routine and fatigue</div>
+        </div>
+      </div>
+    </section>
+
+    <section id="benefits">
+      <div class="container">
+        <h2>Why radiologists choose QuickRadiology</h2>
+        <p class="section-desc">Built by doctors for doctors. Helps produce high-quality reports faster, keep a consistent style, and avoid errors.</p>
+        <div class="cards cards-3x2">
+          <div class="card">
+            <div class="icon">&#9889;</div>
+            <h3>Speed without compromise</h3>
+            <p>Switch between ready blocks, use autocomplete and frequent phrases. Less typing - more time for interpretation.</p>
+          </div>
+          <div class="card">
+            <div class="icon">&#128218;</div>
+            <h3>Professional templates</h3>
+            <p>Hundreds of MRI templates and protocols for CT, X-ray and ultrasound by organ and region: brain, joints, spine, pelvic organs, and more. Standardized wording.</p>
+          </div>
+          <div class="card">
+            <div class="icon">&#128270;</div>
+            <h3>Protocol library search</h3>
+            <p>Instant search across thousands of ready reports. Take a base text, adapt it to the patient, and send it out.</p>
+          </div>
+          <div class="card">
+            <div class="icon">&#128737;</div>
+            <h3>Security and privacy</h3>
+            <p>Encrypted storage, secure data transfer, and the ability to work without patient identifiers and export to Word.</p>
+          </div>
+          <div class="card">
+            <div class="icon">&#128196;</div>
+            <h3>Export and letterhead</h3>
+            <p>Export to Word/PDF for printing, uploading to RIS, or sending to the patient. Email the patient in one click.</p>
+          </div>
+          <div class="card">
+            <div class="icon">&#129309;</div>
+            <h3>Consistent report style</h3>
+            <p>Ready phrasing and structure help keep a consistent style across shifts and clinics.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="reviews" id="reviews">
+      <div class="container">
+        <h2>What doctors say about QuickRadiology</h2>
+        <p class="section-desc">Reviews from practicing radiologists who already use the service daily.</p>
+        <div class="reviews-grid">
+          <div class="review-card">
+            <p class="review-text">"A very useful app! It shortens report writing time and makes a doctor's life much easier. The app is detailed and functional but not overloaded, lightweight. I like it and use it in practice. Thank you!"</p>
+            <div class="review-author">- Ekaterina Adaeva</div>
+            <div class="review-meta">radiologist, S.M. Kirov Military Medical Academy, Saint Petersburg</div>
+          </div>
+          <div class="review-card">
+            <p class="review-text">"The app is very convenient and intuitive. No questions: everything is convenient, everything works, great idea!"</p>
+            <div class="review-author">- Yulia Kopteva</div>
+            <div class="review-meta">radiologist, City Hospital No. 40, Sestroretsk</div>
+          </div>
+          <div class="review-card">
+            <p class="review-text">"It lets me spend more time on complex cases. I can't single out the most valuable feature; the whole program is a different approach to report creation. Routine work becomes easier. The builder and templates felt unusual at first, but after a day I only work with them. An essential tool!"</p>
+            <div class="review-author">- Alexander Efimtsev</div>
+            <div class="review-meta">Department of Radiology, Almazov National Medical Research Center, Saint Petersburg</div>
+          </div>
+        </div>
+
+        <div class="clinics-strip" style="margin-top:28px;">
+          <div class="clinics-logos">
+            <img src="../clinic1.png" alt="Clinic logo 3">
+            <img src="../clinic2.png" alt="Clinic logo 1">
+            <img src="../clinic3.png" alt="Clinic logo 4">
+            <img src="../clinic4.jpg" alt="Clinic logo 2">
+            <img src="../clinic5.png" alt="Clinic logo 5">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="templates" style="background: radial-gradient(circle at 20% 50%, rgba(31,94,255,0.04), transparent 50%), radial-gradient(circle at 80% 50%, rgba(12,195,151,0.04), transparent 50%), var(--bg);">
+      <div class="container">
+        <h2>Professional template builders and study protocols</h2>
+        <div style="display: flex; align-items: center; justify-content: space-between; gap: 20px; margin-bottom: 32px; flex-wrap: wrap;">
+          <p class="section-desc" style="margin: 0; flex: 1; min-width: 300px;">Structures prepared by radiologists with fields for precise descriptions. Updated based on clinical guidelines and practice.</p>
+          <div class="pill" style="background: rgba(12,195,151,0.1); border-color: rgba(12,195,151,0.3); color: #0a5f47; flex-shrink: 0; font-size: 13px;">
+            We update templates based on clinician requests
+          </div>
+        </div>
+        <div class="templates-showcase">
+          <div class="template-card-featured">
+            <div class="template-header">
+              <div class="template-number">01</div>
+              <div class="template-badge">Popular</div>
+            </div>
+            <h3>Spine</h3>
+            <p>Cervical, thoracic, lumbar regions, MRI protocols.</p>
+            <div class="template-tags">
+              <span class="tag">MRI</span>
+              <span class="tag">Cervical spine</span>
+              <span class="tag">Lumbar</span>
+            </div>
+          </div>
+          <div class="templates-grid-compact">
+            <div class="template-card-compact">
+              <div class="template-number-small">02</div>
+              <div class="template-content">
+                <h3>Brain</h3>
+                <p>Standard MRI protocol, vascular programs, functional studies.</p>
+              </div>
+            </div>
+            <div class="template-card-compact">
+              <div class="template-number-small">03</div>
+              <div class="template-content">
+                <h3>Joints</h3>
+                <p>Knee, hip, shoulder; clear blocks for cartilage, ligaments, and menisci.</p>
+              </div>
+            </div>
+            <div class="template-card-compact">
+              <div class="template-number-small">04</div>
+              <div class="template-content">
+                <h3>Pelvic organs</h3>
+                <p>Male and female protocols, prostate, gynecology, oncology.</p>
+              </div>
+            </div>
+            <div class="template-card-compact">
+              <div class="template-number-small">05</div>
+              <div class="template-content">
+                <h3>Additional</h3>
+                <p>MR angiography, abdomen, soft tissues, follow-up exams.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="how-it-works" style="background: radial-gradient(circle at 50% 0%, rgba(31,94,255,0.03), transparent 60%), var(--bg);">
+      <div class="container">
+        <h2>What the workflow looks like</h2>
+        <p class="section-desc">A simple and intuitive interface for fast report creation.</p>
+
+        <div style="max-width: 1400px; margin: 0 auto;">
+          <div class="glass" style="padding: 24px; margin-bottom: 32px; overflow: visible;">
+            <div class="screenshot-wrapper" style="width: 100%; margin: 0;">
+              <img src="main_big.png" alt="MRI template builder" class="screenshot">
+            </div>
+          </div>
+
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 18px;">
+            <div class="card" style="position: relative; padding: 24px;">
+              <div style="position: absolute; top: 20px; right: 20px; width: 48px; height: 48px; border-radius: 12px; background: linear-gradient(135deg, var(--primary), var(--accent)); display: flex; align-items: center; justify-content: center; color: var(--white); font-weight: 800; font-size: 20px; box-shadow: 0 4px 12px rgba(18,52,212,0.25);">1</div>
+              <h3 style="margin: 0 0 12px; padding-right: 60px; font-size: 20px;">Choose the study</h3>
+              <p style="margin: 0; color: var(--text-muted); line-height: 1.6;">Open the required MRI template or protocol from the library.</p>
+            </div>
+
+            <div class="card" style="position: relative; padding: 24px;">
+              <div style="position: absolute; top: 20px; right: 20px; width: 48px; height: 48px; border-radius: 12px; background: linear-gradient(135deg, var(--primary), var(--accent)); display: flex; align-items: center; justify-content: center; color: var(--white); font-weight: 800; font-size: 20px; box-shadow: 0 4px 12px rgba(18,52,212,0.25);">2</div>
+              <h3 style="margin: 0 0 12px; padding-right: 60px; font-size: 20px;">Fill in the blocks</h3>
+              <p style="margin: 0; color: var(--text-muted); line-height: 1.6;">Mark findings and use ready phrases.</p>
+            </div>
+
+            <div class="card" style="position: relative; padding: 24px;">
+              <div style="position: absolute; top: 20px; right: 20px; width: 48px; height: 48px; border-radius: 12px; background: linear-gradient(135deg, var(--primary), var(--accent)); display: flex; align-items: center; justify-content: center; color: var(--white); font-weight: 800; font-size: 20px; box-shadow: 0 4px 12px rgba(18,52,212,0.25);">3</div>
+              <h3 style="margin: 0 0 12px; padding-right: 60px; font-size: 20px;">Export and deliver</h3>
+              <p style="margin: 0; color: var(--text-muted); line-height: 1.6;">Text/Word/PDF with your letterhead and signature. Link to the patient or to RIS.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="how">
+      <div class="container split">
+        <div>
+          <h2>Work from the clinic or home</h2>
+          <p class="section-desc">All you need is a browser. Fast access to the report library and templates from any device.</p>
+          <div class="cards" style="grid-template-columns: repeat(auto-fit, minmax(220px,1fr));">
+            <div class="card"><div class="icon">&#127760;</div><h3>Cloud</h3><p>Always up to date, with backups and protection.</p></div>
+            <div class="card"><div class="icon">&#128279;</div><h3>Shared access</h3><p>Share a report link or send a file.</p></div>
+            <div class="card"><div class="icon">&#128200;</div><h3>Transparent earnings</h3><p>More protocols per shift - higher income with the same time.</p></div>
+            <div class="card"><div class="icon">&#128338;</div><h3>14 days free access</h3><p>Try all features before paying.</p></div>
+          </div>
+        </div>
+        <div class="pricing" id="pricing" style="margin-left: auto;">
+          <div class="eyebrow" style="margin-bottom:10px;">For physicians and private practice</div>
+          <h3 style="margin:0;">Professional</h3>
+          <div class="price">$29.99 per month</div>
+          <div class="price-note">14 days free, then monthly. Cancel anytime.</div>
+          <ul>
+            <li>All MRI templates and protocols for other modalities (CT, X-ray, ultrasound)</li>
+            <li>Unlimited number of reports</li>
+            <li>Word / PDF export with your letterhead</li>
+            <li>Unlimited search across thousands of protocols</li>
+            <li>Support via email/chat</li>
+          </ul>
+          <a class="btn btn-primary" href="https://client.quickradiology.com" target="_blank" rel="noopener" style="width:100%;">Start 14-day trial</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="faq">
+      <div class="container">
+        <h2>Frequently asked questions</h2>
+        <p class="section-desc">Answers to the most common questions about the service.</p>
+        <div class="faq">
+          <div class="faq-item" onclick="toggleFaq(this)">
+            <div class="faq-q"><span>Why switch if I can write in Word?</span><span class="faq-toggle">&#9660;</span></div>
+            <div class="faq-a">Word does not speed up typing and does not provide ready blocks. In QuickRadiology you write a report in minutes, keep a consistent style, and avoid typos. More ready protocols - higher income per shift.</div>
+          </div>
+          <div class="faq-item" onclick="toggleFaq(this)">
+            <div class="faq-q"><span>Can I customize templates?</span><span class="faq-toggle">&#9660;</span></div>
+            <div class="faq-a">Yes, we have a template adjustment feature. You can edit template texts in a dedicated editor.</div>
+          </div>
+          <div class="faq-item" onclick="toggleFaq(this)">
+            <div class="faq-q"><span>Where is data stored? How secure is it?</span><span class="faq-toggle">&#9660;</span></div>
+            <div class="faq-a">Data is stored in the cloud with encryption and backups. You can work without patient identifiers and export to text/Word/PDF for local storage.</div>
+          </div>
+          <div class="faq-item" onclick="toggleFaq(this)">
+            <div class="faq-q"><span>How long does it take to learn?</span><span class="faq-toggle">&#9660;</span></div>
+            <div class="faq-a">Most doctors start working within 1-2 days. There are tips, ready phrasing, and support.</div>
+          </div>
+          <div class="faq-item" onclick="toggleFaq(this)">
+            <div class="faq-q"><span>What if it does not fit?</span><span class="faq-toggle">&#9660;</span></div>
+            <div class="faq-a">The first 14 days are free. You can cancel anytime.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="cta">
+      <div class="container">
+        <div class="cta">
+          <h2 style="margin:0 0 8px;">Ready to write reports faster?</h2>
+          <p>We will launch your access today. Try all features: MRI templates, protocols, export, and search.</p>
+          <div class="cta-actions">
+            <a class="btn btn-primary" href="https://client.quickradiology.com" target="_blank" rel="noopener">Go to the system</a>
+            <a class="btn btn-ghost" href="mailto:support@quickradiology.com">Contact support</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="footer-inner">
+        <div class="footer-grid">
+          <div class="footer-brand">
+            <div class="footer-brand-main">
+              <img src="../qr_logo_2.png" alt="QuickRadiology logo">
+              <span class="footer-title">QuickRadiology</span>
+            </div>
+            <div class="footer-tagline">Radiology assistant for MRI, CT, X-ray and ultrasound. Standardized templates and faster reports.</div>
+            <div class="footer-social">
+              <a href="https://instagram.com/quickradiology" target="_blank" rel="noopener">
+                <img src="../ig_white.png" alt="Instagram">
+                <span>@quickradiology</span>
+              </a>
+            </div>
+          </div>
+          <div class="footer-links-group">
+            <h4>Navigation</h4>
+            <ul>
+              <li><a href="#benefits">Benefits</a></li>
+              <li><a href="#templates">Templates</a></li>
+              <li><a href="#how">How it works</a></li>
+              <li><a href="#pricing">Pricing</a></li>
+              <li><a href="#faq">FAQ</a></li>
+            </ul>
+          </div>
+          <div class="footer-links-group">
+            <h4>Documents & contact</h4>
+            <ul>
+              <li><a href="agreement.html">User agreement</a></li>
+              <li><a href="mailto:support@quickradiology.com">support@quickradiology.com</a></li>
+              <li><a href="tel:+79112770898">+7 (911) 277-08-98</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="legal" style="text-align:left; margin-top:0;">
+          <p>LLC "Kharlin Mobile" &middot; INN 7804185925 &middot; OGRN 1157847058478</p>
+        </div>
+        <div class="footer-bottom">
+          <span>&copy; 2026 QuickRadiology. All rights reserved.</span>
+          <span>Service for radiologists.</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <div class="image-modal" id="imageModal" aria-hidden="true">
+    <button class="image-modal-close" type="button" aria-label="Close image">&times;</button>
+    <img src="main_big.png" alt="MRI template builder">
+  </div>
+
+  <script>
+    function toggleFaq(el) {
+      el.classList.toggle('active');
+    }
+
+    // Smooth scroll for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          e.preventDefault();
+          target.scrollIntoView({ behavior: 'smooth' });
+        }
+      });
+    });
+
+    const modal = document.getElementById('imageModal');
+    const screenshot = document.querySelector('.screenshot');
+    const closeButton = modal ? modal.querySelector('.image-modal-close') : null;
+
+    function closeImageModal() {
+      if (!modal) {
+        return;
+      }
+      modal.classList.remove('active');
+      modal.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+    }
+
+    if (modal && screenshot && closeButton) {
+      screenshot.addEventListener('click', () => {
+        modal.classList.add('active');
+        modal.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
+      });
+
+      closeButton.addEventListener('click', closeImageModal);
+
+      modal.addEventListener('click', (event) => {
+        if (event.target === modal) {
+          closeImageModal();
+        }
+      });
+
+      document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape' && modal.classList.contains('active')) {
+          closeImageModal();
+        }
+      });
+    }
+  </script>
+</body>
+</html>
