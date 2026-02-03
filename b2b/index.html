@@ -269,13 +269,140 @@
     }
     .compare-table tr:last-child td { border-bottom: 0; }
 
+    .templates-showcase {
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 24px;
+      margin-top: 32px;
+      align-items: start;
+    }
+    .template-card-featured {
+      background: var(--white);
+      border: 2px solid rgba(31,94,255,0.15);
+      border-radius: var(--radius);
+      padding: 28px;
+      box-shadow: 0 12px 36px rgba(15, 44, 86, 0.1);
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    .template-card-featured::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--primary), var(--accent));
+    }
+    .template-card-featured:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 16px 48px rgba(15, 44, 86, 0.15);
+      border-color: rgba(31,94,255,0.3);
+    }
+    .template-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 20px;
+    }
+    .template-number {
+      font-size: 48px;
+      font-weight: 800;
+      line-height: 1;
+      color: var(--primary-dark);
+      opacity: 0.15;
+      letter-spacing: -0.03em;
+      font-variant-numeric: tabular-nums;
+    }
+    .template-badge {
+      background: linear-gradient(135deg, var(--accent), #0aa87d);
+      color: var(--white);
+      padding: 6px 12px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      box-shadow: 0 4px 12px rgba(12,195,151,0.3);
+    }
+    .template-card-featured h3 {
+      margin: 0 0 10px;
+      font-size: 24px;
+      color: var(--text);
+      font-weight: 700;
+    }
+    .template-card-featured p {
+      margin: 0 0 16px;
+      color: var(--text-muted);
+      line-height: 1.7;
+      font-size: 15px;
+    }
+    .template-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .tag {
+      background: rgba(31,94,255,0.08);
+      color: var(--primary-dark);
+      padding: 6px 12px;
+      border-radius: 8px;
+      font-size: 12px;
+      font-weight: 600;
+      border: 1px solid rgba(31,94,255,0.15);
+    }
+    .templates-grid-compact {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
+    .template-card-compact {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 20px;
+      box-shadow: 0 8px 24px rgba(15, 44, 86, 0.06);
+      transition: all 0.25s ease;
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+    }
+    .template-card-compact:hover {
+      transform: translateX(4px);
+      box-shadow: 0 12px 32px rgba(15, 44, 86, 0.1);
+      border-color: rgba(31,94,255,0.2);
+    }
+    .template-number-small {
+      font-size: 32px;
+      font-weight: 800;
+      line-height: 1;
+      color: var(--primary-dark);
+      opacity: 0.12;
+      letter-spacing: -0.02em;
+      font-variant-numeric: tabular-nums;
+      flex-shrink: 0;
+      min-width: 48px;
+    }
+    .template-content {
+      flex: 1;
+    }
+    .template-card-compact h3 {
+      margin: 0 0 6px;
+      font-size: 18px;
+      color: var(--text);
+      font-weight: 700;
+    }
+    .template-card-compact p {
+      margin: 0;
+      color: var(--text-muted);
+      line-height: 1.6;
+      font-size: 14px;
+    }
+
     .cards {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
       gap: 18px;
-    }
-    .use-cases-grid {
-      grid-template-columns: repeat(3, minmax(0, 1fr));
     }
     .cards-3x2 {
       grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -603,7 +730,9 @@
       .btn { width: 100%; justify-content: center; }
       header { position: static; }
       .hero { padding-top: 64px; padding-bottom: 64px; }
-      .use-cases-grid { grid-template-columns: minmax(0, 1fr); }
+      .templates-showcase { grid-template-columns: 1fr; gap: 20px; }
+      .template-card-featured { padding: 24px; }
+      .template-card-compact { padding: 18px; }
     }
   </style>
   <!-- Yandex.Metrika counter -->
@@ -671,12 +800,12 @@
               <span>быстрее подготовка заключения</span>
             </div>
             <div class="stat">
-              <strong>+30%</strong>
+              <strong>+20%</strong>
               <span>пропускная способность кабинета</span>
             </div>
             <div class="stat">
               <strong>–40%</strong>
-              <span>времени на оформление</span>
+              <span>времени на описание исследования</span>
             </div>
             <div class="stat">
               <strong>24/7</strong>
@@ -726,12 +855,12 @@
           <div class="card">
             <div class="icon">⚡</div>
             <h3>Ускорение оборота</h3>
-            <p>Сокращаем время на описание исследования до 10–15 минут. Это позволяет принять больше пациентов без расширения смены.</p>
+            <p>Сокращаем время на описание исследования до 5–10 минут. Это позволяет принять больше пациентов без расширения смены.</p>
           </div>
           <div class="card">
             <div class="icon">📈</div>
             <h3>Прогнозируемая экономика</h3>
-            <p>Стоимость сервиса около 1% от ФОТ врачей, при этом вы получаете прирост выручки около 20–30%.</p>
+            <p>Стоимость сервиса около 1% от ФОТ врачей, при этом вы получаете прирост выручки около 20%.</p>
           </div>
           <div class="card">
             <div class="icon">🧠</div>
@@ -852,36 +981,56 @@
       <div class="container">
         <h2>Сценарии использования</h2>
         <p class="section-desc">Гибкая модель: используйте QuickRadiology автономно или как ускоритель текущего процесса.</p>
-        <div class="cards use-cases-grid">
-          <div class="card">
-            <div class="icon">📝</div>
+        <div class="templates-showcase">
+          <div class="template-card-featured">
+            <div class="template-header">
+              <div class="template-number">01</div>
+              <div class="template-badge">Частый сценарий</div>
+            </div>
             <h3>Копирование в МИС</h3>
-            <p>Быстро формируете текст и переносите в вашу систему без интеграции.</p>
+            <p>Формируете текст заключения в QuickRadiology и переносите в вашу МИС без интеграции. Быстро, просто и без изменений в процессах клиники.</p>
+            <div class="template-tags">
+              <span class="tag">Без интеграции</span>
+              <span class="tag">Любая МИС</span>
+              <span class="tag">Быстро</span>
+            </div>
           </div>
-          <div class="card">
-            <div class="icon">📄</div>
-            <h3>PDF/Word с бланком</h3>
-            <p>Экспорт с вашей шапкой и подписью — готово для выдачи пациенту.</p>
-          </div>
-          <div class="card">
-            <div class="icon">🔗</div>
-            <h3>Ссылка пациенту</h3>
-            <p>Отправляете ссылку лечащему врачу или пациенту без пересылки файлов.</p>
-          </div>
-          <div class="card">
-            <div class="icon">🔎</div>
-            <h3>Поиск по базе</h3>
-            <p>Находите готовые формулировки и протоколы за секунды.</p>
-          </div>
-          <div class="card">
-            <div class="icon">✅</div>
-            <h3>Единый стандарт</h3>
-            <p>Один стиль заключений для всех филиалов и врачей.</p>
-          </div>
-          <div class="card">
-            <div class="icon">⚡</div>
-            <h3>Быстрый запуск</h3>
-            <p>Старт за 1 день без долгих интеграций и сложных внедрений.</p>
+          <div class="templates-grid-compact">
+            <div class="template-card-compact">
+              <div class="template-number-small">02</div>
+              <div class="template-content">
+                <h3>PDF/Word с бланком</h3>
+                <p>Экспорт с вашей шапкой и подписью — готово для выдачи пациенту.</p>
+              </div>
+            </div>
+            <div class="template-card-compact">
+              <div class="template-number-small">03</div>
+              <div class="template-content">
+                <h3>Ссылка пациенту</h3>
+                <p>Отправляете ссылку лечащему врачу или пациенту без пересылки файлов.</p>
+              </div>
+            </div>
+            <div class="template-card-compact">
+              <div class="template-number-small">04</div>
+              <div class="template-content">
+                <h3>Поиск по базе</h3>
+                <p>Находите готовые формулировки и протоколы за секунды.</p>
+              </div>
+            </div>
+            <div class="template-card-compact">
+              <div class="template-number-small">05</div>
+              <div class="template-content">
+                <h3>Единый стандарт</h3>
+                <p>Один стиль заключений для всех филиалов и врачей.</p>
+              </div>
+            </div>
+            <div class="template-card-compact">
+              <div class="template-number-small">06</div>
+              <div class="template-content">
+                <h3>Быстрый запуск</h3>
+                <p>Старт за 1 день без долгих интеграций и сложных внедрений.</p>
+              </div>
+            </div>
           </div>
         </div>
       </div>
