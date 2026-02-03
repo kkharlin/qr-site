@@ -1,0 +1,1044 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>QuickRadiology для клиник и диагностических центров</title>
+  <meta name="description" content="QuickRadiology для клиник и медицинских центров: ускоряем подготовку заключений, повышаем пропускную способность и стандартизируем качество. Обучение.">
+  <link rel="icon" href="favicon.ico" type="image/x-icon">
+  <style>
+    :root {
+      --primary: #1234d4;
+      --primary-dark: #071a78;
+      --accent: #0cc397;
+      --text: #0b1b32;
+      --text-muted: #5b6b7c;
+      --bg: #f6f8fb;
+      --section-alt: #f4f7ff;
+      --white: #ffffff;
+      --border: #e3e8ef;
+      --shadow: 0 18px 48px rgba(10, 32, 85, 0.12);
+      --radius: 16px;
+    }
+
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: inherit; text-decoration: none; }
+    .container {
+      width: min(1180px, 100%);
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: linear-gradient(120deg, var(--primary-dark), #0e2079);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 0;
+      gap: 20px;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 700;
+      font-size: 19px;
+      color: var(--white);
+      letter-spacing: -0.01em;
+    }
+    .brand img {
+      height: 42px;
+      width: auto;
+      display: block;
+    }
+    .brand-text {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.1;
+    }
+    .brand-sub {
+      font-size: 12px;
+      font-weight: 600;
+      color: rgba(255,255,255,0.7);
+    }
+    .brand-mark {
+      width: 40px;
+      height: 40px;
+      border-radius: 12px;
+      background: linear-gradient(140deg, var(--primary), #4f6bff);
+      display: grid;
+      place-items: center;
+      color: var(--white);
+      font-weight: 800;
+      font-size: 20px;
+      box-shadow: 0 10px 24px rgba(18, 52, 212, 0.35);
+    }
+    .nav-links {
+      display: flex;
+      gap: 18px;
+      flex-wrap: wrap;
+      font-weight: 600;
+      color: rgba(255,255,255,0.85);
+    }
+    .nav-links a:hover { color: var(--white); }
+    .nav-cta {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 12px 18px;
+      border-radius: 12px;
+      border: 1px solid transparent;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      white-space: nowrap;
+    }
+    .btn-primary {
+      background: var(--white);
+      color: var(--primary-dark);
+      box-shadow: 0 0 0 1px rgba(255,255,255,0.4), var(--shadow);
+    }
+    .btn-primary:hover { filter: brightness(0.96); }
+    .btn-primary-blue {
+      background: var(--primary);
+      color: var(--white);
+      box-shadow: 0 10px 22px rgba(18,52,212,0.25);
+    }
+    .btn-primary-blue:hover { filter: brightness(0.98); }
+    .btn-ghost {
+      background: rgba(255,255,255,0.08);
+      color: var(--white);
+      border-color: rgba(255, 255, 255, 0.6);
+    }
+
+    .hero {
+      padding: 96px 0 80px;
+      background: radial-gradient(circle at 10% 20%, rgba(31,94,255,0.15), transparent 32%),
+                  radial-gradient(circle at 80% 0%, rgba(12,195,151,0.14), transparent 35%),
+                  var(--white);
+      border-bottom: 1px solid var(--border);
+    }
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr;
+      gap: 56px;
+      align-items: center;
+    }
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 12px;
+      background: rgba(12,195,151,0.12);
+      border-radius: 999px;
+      color: #0a5f47;
+      font-weight: 700;
+      letter-spacing: 0.01em;
+    }
+    h1 {
+      margin: 20px 0 18px;
+      font-size: clamp(30px, 5vw, 36px);
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+    }
+    .lead {
+      font-size: 18px;
+      color: var(--text-muted);
+      max-width: 640px;
+      margin-bottom: 28px;
+    }
+    .hero-actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin: 26px 0 16px;
+    }
+    .badge-row {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 12px;
+    }
+    .badge {
+      background: rgba(31,94,255,0.08);
+      color: var(--primary-dark);
+      padding: 6px 10px;
+      border-radius: 10px;
+      font-weight: 600;
+      font-size: 13px;
+    }
+    .glass {
+      background: rgba(255,255,255,0.9);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 22px;
+    }
+    .stat-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+      gap: 14px;
+      margin-top: 12px;
+    }
+    .stat {
+      background: rgba(31,94,255,0.06);
+      border-radius: 12px;
+      padding: 14px;
+    }
+    .stat strong {
+      display: block;
+      font-size: 22px;
+      color: var(--primary-dark);
+    }
+    .stat span { color: var(--text-muted); font-weight: 600; }
+
+    section {
+      padding: 64px 0;
+      background: var(--white);
+    }
+    section:nth-of-type(even) { background: var(--section-alt); }
+    h2 {
+      font-size: clamp(26px, 3.4vw, 34px);
+      margin: 0 0 10px;
+    }
+    .section-desc {
+      color: var(--text-muted);
+      max-width: 760px;
+      margin-bottom: 32px;
+    }
+    .demo-wrap {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .screenshot {
+      width: 100%;
+      display: block;
+      border-radius: 16px;
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+      background: var(--white);
+    }
+    .compare-table {
+      width: 100%;
+      border-collapse: collapse;
+      background: var(--white);
+      border-radius: 14px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+    }
+    .compare-table th,
+    .compare-table td {
+      padding: 14px 16px;
+      text-align: left;
+      border-bottom: 1px solid var(--border);
+    }
+    .compare-table th {
+      background: rgba(31,94,255,0.08);
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .compare-table td:nth-child(2) {
+      color: #b42318;
+      background: rgba(248, 99, 99, 0.08);
+    }
+    .compare-table td:nth-child(3) {
+      color: #067647;
+      background: rgba(12, 195, 151, 0.12);
+    }
+    .compare-table tr:last-child td { border-bottom: 0; }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 18px;
+    }
+    .use-cases-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+    .cards-3x2 {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+    .card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 20px;
+      box-shadow: 0 10px 30px rgba(15, 44, 86, 0.08);
+    }
+    .card h3 { margin: 10px 0 8px; }
+    .card p { color: var(--text-muted); margin: 0; }
+    .icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 12px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(31,94,255,0.12);
+      color: var(--primary-dark);
+      font-weight: 800;
+    }
+
+    .split {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+      align-items: center;
+    }
+    .list {
+      padding: 0;
+      margin: 0;
+      list-style: none;
+      display: grid;
+      gap: 12px;
+    }
+    .list li {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 14px 14px 14px 16px;
+      box-shadow: 0 10px 26px rgba(10,32,85,0.05);
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+    }
+    .list li strong { display: block; margin-bottom: 4px; }
+    .list .dot {
+      width: 12px; height: 12px; margin-top: 6px;
+      border-radius: 50%;
+      background: var(--accent);
+      flex-shrink: 0;
+    }
+
+    .roi {
+      background: linear-gradient(120deg, #0c1f47, #0b317a);
+      color: var(--white);
+      border-radius: 20px;
+      padding: 32px;
+      box-shadow: var(--shadow);
+    }
+    .roi h3 { margin: 0 0 10px; }
+    .roi-table {
+      background: rgba(255,255,255,0.08);
+      border-radius: 14px;
+      padding: 18px;
+      display: grid;
+      gap: 10px;
+    }
+    .roi-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid rgba(255,255,255,0.12);
+    }
+    .roi-row:last-child {
+      border-bottom: none;
+      font-weight: 700;
+    }
+
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 18px;
+    }
+    .pricing-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      box-shadow: var(--shadow);
+      padding: 26px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+    .pricing-card.featured {
+      border: 2px solid rgba(18,52,212,0.4);
+      box-shadow: 0 18px 44px rgba(10,32,85,0.18);
+    }
+    .price {
+      font-size: 32px;
+      font-weight: 800;
+      color: var(--primary-dark);
+    }
+    .price-note { color: var(--text-muted); }
+    .pricing-card ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: grid;
+      gap: 10px;
+    }
+    .pricing-card li::before {
+      content: "✓";
+      color: var(--accent);
+      font-weight: 800;
+      margin-right: 8px;
+    }
+    .pricing-card li { display: flex; align-items: flex-start; gap: 8px; }
+
+    .faq {
+      display: grid;
+      gap: 12px;
+    }
+    .faq-item {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 14px 16px;
+      cursor: pointer;
+      box-shadow: 0 8px 20px rgba(10,32,85,0.06);
+    }
+    .faq-q {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      align-items: center;
+      font-weight: 700;
+    }
+    .faq-a {
+      max-height: 0;
+      overflow: hidden;
+      color: var(--text-muted);
+      transition: max-height 0.25s ease, margin-top 0.25s ease;
+      margin-top: 0;
+    }
+    .faq-item.active .faq-a {
+      max-height: 320px;
+      margin-top: 8px;
+    }
+    .faq-toggle { color: var(--primary); font-weight: 900; }
+
+    .cta {
+      background: linear-gradient(120deg, #0c1f47, #0b317a);
+      color: var(--white);
+      border-radius: 20px;
+      padding: 32px;
+      box-shadow: var(--shadow);
+      text-align: center;
+    }
+    .cta p { color: rgba(255,255,255,0.9); }
+    .cta-actions {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: 18px;
+    }
+    .cta .btn-primary {
+      background: linear-gradient(135deg, #e8f2ff, #d4f5ed);
+      color: #051026;
+      box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+      padding-inline: 28px;
+      font-size: 16px;
+    }
+    .cta .btn-ghost {
+      background: rgba(255,255,255,0.1);
+      border-color: rgba(255,255,255,0.95);
+      color: #ffffff;
+      padding-inline: 24px;
+      font-size: 15px;
+    }
+
+    .contact-form {
+      background: var(--white);
+      padding: 24px;
+      border-radius: 18px;
+      box-shadow: var(--shadow);
+      max-width: 640px;
+      margin: 24px auto 0;
+      text-align: left;
+    }
+    .form-embed {
+      width: 100%;
+      min-height: 900px;
+      border: 0;
+      border-radius: 12px;
+    }
+    .form-group {
+      margin-bottom: 16px;
+    }
+    .form-group label {
+      display: block;
+      margin-bottom: 6px;
+      font-weight: 600;
+      color: var(--text);
+    }
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+      width: 100%;
+      padding: 10px 12px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      font-size: 15px;
+      transition: border-color 0.2s;
+      font-family: inherit;
+    }
+    .form-group input:focus,
+    .form-group textarea:focus,
+    .form-group select:focus {
+      outline: none;
+      border-color: var(--primary);
+    }
+    .form-group textarea {
+      resize: vertical;
+      min-height: 120px;
+    }
+
+    footer {
+      background: transparent;
+      padding: 40px 0 32px;
+      font-size: 14px;
+    }
+    .footer-inner {
+      background: radial-gradient(circle at 0 0, rgba(12,195,151,0.12), transparent 55%),
+                  radial-gradient(circle at 100% 20%, rgba(18,52,212,0.12), transparent 55%),
+                  var(--white);
+      border-radius: 22px;
+      border: 1px solid var(--border);
+      box-shadow: 0 18px 44px rgba(10,32,85,0.12);
+      padding: 26px 24px 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 2fr) repeat(2, minmax(0, 1.2fr));
+      gap: 22px;
+      align-items: start;
+    }
+    .footer-brand {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .footer-brand-main {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .footer-brand-main img {
+      height: 40px;
+      width: auto;
+      display: block;
+    }
+    .footer-title {
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      color: var(--text);
+    }
+    .footer-tagline {
+      color: var(--text-muted);
+      max-width: 320px;
+    }
+    .footer-links-group h4 {
+      margin: 0 0 8px;
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-muted);
+    }
+    .footer-links-group ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: grid;
+      gap: 6px;
+    }
+    .footer-links-group a {
+      color: var(--text);
+      text-decoration: none;
+      font-weight: 500;
+    }
+    .footer-links-group a:hover {
+      color: var(--primary-dark);
+    }
+    .legal {
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 18px;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+    .legal strong { color: var(--text); }
+    .footer-bottom {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 10px;
+      padding-top: 10px;
+      border-top: 1px solid rgba(227,232,239,0.8);
+      color: var(--text-muted);
+      font-size: 12px;
+    }
+
+    @media (max-width: 900px) {
+      .hero-grid { grid-template-columns: 1fr; gap: 40px; }
+      .cards-3x2 { grid-template-columns: minmax(0, 1fr); }
+      .nav-links { display: none; }
+      .btn { width: 100%; justify-content: center; }
+      header { position: static; }
+      .hero { padding-top: 64px; padding-bottom: 64px; }
+      .use-cases-grid { grid-template-columns: minmax(0, 1fr); }
+    }
+  </style>
+  <!-- Yandex.Metrika counter -->
+  <script type="text/javascript">
+    (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+      m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+    (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+
+    ym(62748202, "init", {
+      clickmap:true,
+      trackLinks:true,
+      accurateTrackBounce:true,
+      webvisor:true
+    });
+  </script>
+  <noscript><div><img src="https://mc.yandex.ru/watch/62748202" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+</head>
+<body>
+  <header>
+    <div class="container nav">
+      <div class="brand">
+        <img src="qr_logo_2_white.png" alt="QuickRadiology логотип">
+        <span class="brand-text">
+          <span>QuickRadiology</span>
+          <span class="brand-sub">для бизнеса</span>
+        </span>
+      </div>
+      <div class="nav-links">
+        <a href="#benefits">Преимущества</a>
+        <a href="#how">Внедрение</a>
+        <a href="#roi">Экономика</a>
+        <a href="#pricing">Тарифы</a>
+        <a href="#faq">FAQ</a>
+      </div>
+      <div class="nav-cta">
+        <a class="btn btn-primary" href="#contact">Запросить демо</a>
+        <a class="btn btn-ghost" href="https://client.quickradiology.com" target="_blank" rel="noopener">Войти</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container hero-grid">
+        <div>
+          <div class="eyebrow">B2B решение для клиник и диагностических центров</div>
+          <h1>Увеличьте прибыль отделения лучевой диагностики без роста штата</h1>
+          <p class="lead">QuickRadiology стандартизирует и ускоряет подготовку заключений по МРТ, КТ, рентгену и УЗИ. Врачи тратят меньше времени на написание заключений, руководство получает увеличение эффективности/прибыли/пропускной способности и контроль качества.</p>
+          <div class="hero-actions">
+            <a class="btn btn-primary-blue" href="#contact">Запросить демо</a>
+            <a class="btn btn-primary-blue" href="#pricing">Посмотреть цены</a>
+          </div>
+          <div class="badge-row">
+            <span class="badge">Старт за 1 день</span>
+            <span class="badge">Рост продуктивности на 2–3 день</span>
+            <span class="badge">Выделенный менеджер</span>
+          </div>
+        </div>
+        <div class="glass">
+          <h3 style="margin:0 0 8px;">Результаты для бизнеса</h3>
+          <p class="lead" style="font-size:16px; margin: 10px 0 16px;">Оптимизируем процессы описания исследований, повышаем качество и снижаем нагрузку на врачей в смене.</p>
+          <div class="stat-grid">
+            <div class="stat">
+              <strong>5–10x</strong>
+              <span>быстрее подготовка заключения</span>
+            </div>
+            <div class="stat">
+              <strong>+30%</strong>
+              <span>пропускная способность кабинета</span>
+            </div>
+            <div class="stat">
+              <strong>–40%</strong>
+              <span>времени на оформление</span>
+            </div>
+            <div class="stat">
+              <strong>24/7</strong>
+              <span>доступ к шаблонам и базе</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="roi">
+      <div class="container split">
+        <div>
+          <h2>Экономика проекта</h2>
+          <p class="section-desc">Пример расчета для одного аппарата при стандартной стоимости исследования.</p>
+          <div class="roi">
+            <h3>ROI на одном кабинете</h3>
+            <div class="roi-table">
+              <div class="roi-row"><span>Среднее время без QuickRadiology</span><strong>60 минут</strong></div>
+              <div class="roi-row"><span>Время с QuickRadiology</span><strong>40–45 минут</strong></div>
+              <div class="roi-row"><span>Дополнительные исследования в смену</span><strong>3–4</strong></div>
+              <div class="roi-row"><span>Доп. выручка в месяц</span><strong>180 000–240 000 ₽</strong></div>
+              <div class="roi-row"><span>Стоимость сервиса</span><strong>от 590 ₽ за рабочее место</strong></div>              
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="card">
+            <div class="icon">📊</div>
+            <h3>Эффект в сети клиник</h3>
+            <p>Для сети 5+ аппаратов рост эффективности масштабируется. Скидки для крупных клиентов.</p>
+          </div>
+          <div class="card" style="margin-top:16px;">
+            <div class="icon">✅</div>
+            <h3>Пилот без риска</h3>
+            <p>Проводим пилот на одном отделении, без дорогих внедрений и крупных оплат. Начать можно с чека всего 1180 рублей в месяц.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="benefits">
+      <div class="container">
+        <h2>Ключевые эффекты для клиники</h2>
+        <p class="section-desc">Система построена вокруг показателей эффективности и качества: больше исследований в смену, единые стандарты и простое внедрение.</p>
+        <div class="cards cards-3x2">
+          <div class="card">
+            <div class="icon">⚡</div>
+            <h3>Ускорение оборота</h3>
+            <p>Сокращаем время на описание исследования до 10–15 минут. Это позволяет принять больше пациентов без расширения смены.</p>
+          </div>
+          <div class="card">
+            <div class="icon">📈</div>
+            <h3>Прогнозируемая экономика</h3>
+            <p>Стоимость сервиса около 1% от ФОТ врачей, при этом вы получаете прирост выручки около 20–30%.</p>
+          </div>
+          <div class="card">
+            <div class="icon">🧠</div>
+            <h3>Единый стандарт качества</h3>
+            <p>Шаблоны и контроль формулировок снижают риск ошибок, обеспечивают единый стиль по филиалам.</p>
+          </div>
+          <div class="card">
+            <div class="icon">🔗</div>
+            <h3>Без интеграций на старте</h3>
+            <p>Работаем в облаке, без МИС и API. Индивидуальная интеграция возможна по запросу.</p>
+          </div>
+          <div class="card">
+            <div class="icon">🛡️</div>
+            <h3>Безопасность и контроль</h3>
+            <p>Разграничение доступа и шифрование передачи данных. Можно использовать без персональных данных пациента и экспортировать в Word/PDF либо отправлять пациенту.</p>
+          </div>
+          <div class="card">
+            <div class="icon">🤝</div>
+            <h3>Поддержка внедрения</h3>
+            <p>Обучение врачей, настройка шаблонов, регулярные обновления.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="how" style="border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);">
+      <div class="container split">
+        <div>
+          <h2>Как проходит внедрение</h2>
+          <p class="section-desc">Старт за 1 день: подписываем короткий договор, выставляем счет, после оплаты открываем доступ.</p>
+          <ul class="list">
+            <li><span class="dot"></span><div><strong>Договор и счет</strong>Подписываем короткий договор и выставляем счет на оплату.</div></li>
+            <li><span class="dot"></span><div><strong>Доступ к аккаунтам</strong>После оплаты предоставляем доступ врачам. Уже можно начинать работать!</div></li>
+            <li><span class="dot"></span><div><strong>Консультации врачей</strong>При необходимости проводим консультации и отвечаем на вопросы.</div></li>
+            <li><span class="dot"></span><div><strong>Рост продуктивности</strong>Ощутимый эффект через 2–3 дня работы.</div></li>
+          </ul>
+        </div>
+        <div class="cards">
+          <div class="card">
+            <div class="icon">⏱️</div>
+            <h3>Быстрый запуск</h3>
+            <p>Старт за 1 день, заметный рост продуктивности через 2–3 дня.</p>
+          </div>
+          <div class="card">
+            <div class="icon">🧩</div>
+            <h3>Гибкая модель</h3>
+            <p>Оплата по количеству врачей, прозрачная стоимость и понятные пакеты.</p>
+          </div>
+          <div class="card">
+            <div class="icon">📋</div>
+            <h3>Контроль качества</h3>
+            <p>Единый стиль заключений. Врачи ошибаются, наша система – нет.</p>
+          </div>
+          <div class="card">
+            <div class="icon">📞</div>
+            <h3>Сопровождение</h3>
+            <p>Выделенный менеджер, регулярные обновления и помощь по запросу.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="pricing" style="border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);">
+      <div class="container">
+        <h2>Пакеты для клиник</h2>        
+        <div class="pricing-grid">
+          <div class="pricing-card">
+            <h3 style="margin:0;">Базовый пакет</h3>
+            <div class="price">590 ₽</div>
+            <div class="price-note">За рабочее место в месяц</div>
+            <ul>
+              <li>Полный доступ к шаблонам</li>
+              <li>Поиск по базе заключений</li>
+              <li>Экспорт Word/PDF</li>
+              <li>Отправка пациенту на почту</li>
+              <li>Экспорт по ссылке</li>                        
+            </ul>
+            <a class="btn btn-primary-blue" href="#contact" style="width:100%;">Оставить заявку</a>
+          </div>
+          <div class="pricing-card featured">
+            <h3 style="margin:0;">Оптимальный пакет</h3>
+            <div class="price">790 ₽</div>
+            <div class="price-note">За рабочее место в месяц</div>
+            <ul>
+              <li>Все из базового</li>              
+              <li>Выделенный менеджер</li>              
+              <li>Консультации врачей по запросу</li>
+            </ul>
+            <a class="btn btn-primary-blue" href="#contact" style="width:100%;">Оставить заявку</a>
+          </div>
+          <div class="pricing-card">
+            <h3 style="margin:0;">Профи пакет</h3>
+            <div class="price">990 ₽</div>
+            <div class="price-note">За рабочее место в месяц</div>
+            <ul>
+              <li>Все из оптимального</li>              
+              <li>Индивидуальная настройка шаблонов</li>
+              <li>Создание новых шаблонов</li>              
+            </ul>
+            <a class="btn btn-primary-blue" href="#contact" style="width:100%;">Оставить заявку</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="demo" style="background: radial-gradient(circle at 50% 0%, rgba(31,94,255,0.06), transparent 60%);">
+      <div class="container">
+        <h2>Как выглядит работа</h2>
+        <div class="demo-wrap">
+          <div class="glass" style="padding: 20px;">
+            <img src="main_big.png" alt="Интерфейс QuickRadiology" class="screenshot">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="use-cases">
+      <div class="container">
+        <h2>Сценарии использования</h2>
+        <p class="section-desc">Гибкая модель: используйте QuickRadiology автономно или как ускоритель текущего процесса.</p>
+        <div class="cards use-cases-grid">
+          <div class="card">
+            <div class="icon">📝</div>
+            <h3>Копирование в МИС</h3>
+            <p>Быстро формируете текст и переносите в вашу систему без интеграции.</p>
+          </div>
+          <div class="card">
+            <div class="icon">📄</div>
+            <h3>PDF/Word с бланком</h3>
+            <p>Экспорт с вашей шапкой и подписью — готово для выдачи пациенту.</p>
+          </div>
+          <div class="card">
+            <div class="icon">🔗</div>
+            <h3>Ссылка пациенту</h3>
+            <p>Отправляете ссылку лечащему врачу или пациенту без пересылки файлов.</p>
+          </div>
+          <div class="card">
+            <div class="icon">🔎</div>
+            <h3>Поиск по базе</h3>
+            <p>Находите готовые формулировки и протоколы за секунды.</p>
+          </div>
+          <div class="card">
+            <div class="icon">✅</div>
+            <h3>Единый стандарт</h3>
+            <p>Один стиль заключений для всех филиалов и врачей.</p>
+          </div>
+          <div class="card">
+            <div class="icon">⚡</div>
+            <h3>Быстрый запуск</h3>
+            <p>Старт за 1 день без долгих интеграций и сложных внедрений.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="compare">
+      <div class="container">
+        <h2>Сравнение до/после</h2>
+        <p class="section-desc">Показываем ключевые показатели, которые важны руководителю и главврачу.</p>
+        <table class="compare-table">
+          <thead>
+            <tr>
+              <th>Показатель</th>
+              <th>До QuickRadiology</th>
+              <th>После QuickRadiology</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Время на исследование</td>
+              <td>50–60 минут</td>
+              <td>40–45 минут</td>
+            </tr>
+            <tr>
+              <td>Пропускная способность</td>
+              <td>Ограничена сменой</td>
+              <td>+15-20% исследований</td>
+            </tr>
+            <tr>
+              <td>Опечатки</td>
+              <td>Ручной набор, частые ошибки</td>
+              <td>Автогенерация, без ошибок</td>
+            </tr>
+            <tr>
+              <td>Ошибки</td>
+              <td>Эпизодически что-то пропущено</td>
+              <td>Заполненый шаблон - всё учтено</td>
+            </tr>
+            <tr>
+              <td>Стандартизация</td>
+              <td>Разные подходы врачей</td>
+              <td>Единый стиль для филиалов</td>
+            </tr>
+            <tr>
+              <td>Внедрение</td>
+              <td>Сложные интеграции</td>
+              <td>Запуск за 1 день</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="faq">
+      <div class="container">
+        <h2>Частые вопросы</h2>
+        <p class="section-desc">Отвечаем на ключевые вопросы для медицинских центров и сетей клиник.</p>
+        <div class="faq">
+          <div class="faq-item" onclick="toggleFaq(this)">
+            <div class="faq-q"><span>Интегрируетесь ли вы с МИС или через API?</span><span class="faq-toggle">▼</span></div>
+            <div class="faq-a">На старте работаем автономно без интеграций. По запросу можем обсудить индивидуальные сценарии.</div>
+          </div>
+          <div class="faq-item" onclick="toggleFaq(this)">
+            <div class="faq-q"><span>Как быстро можно запустить пилот?</span><span class="faq-toggle">▼</span></div>
+            <div class="faq-a">Стартуем за 1 день: короткий договор, счет и доступ к аккаунтам после оплаты.</div>
+          </div>
+          <div class="faq-item" onclick="toggleFaq(this)">
+            <div class="faq-q"><span>Насколько безопасны данные пациентов?</span><span class="faq-toggle">▼</span></div>
+            <div class="faq-a">Все передаваемые данные зашифрованы. При желании систему можно использовать без персональных данных пациента.</div>
+          </div>
+          <div class="faq-item" onclick="toggleFaq(this)">
+            <div class="faq-q"><span>Сколько времени нужно врачам на обучение?</span><span class="faq-toggle">▼</span></div>
+            <div class="faq-a">Обычно уже на второй день работы заметен рост продуктивности. При необходимости консультируем врачей.</div>
+          </div>
+          <div class="faq-item" onclick="toggleFaq(this)">
+            <div class="faq-q"><span>Как считается стоимость?</span><span class="faq-toggle">▼</span></div>
+            <div class="faq-a">Оплата по количеству врачей. Стоимость от 590 рублей за рабочее место, пакет зависит от числа врачей.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <div class="container">
+        <div class="cta" style="margin-bottom: 20px;">
+          <h2 style="margin:0 0 8px;">Заявка на подключение</h2>
+          <p>Форма открыта для всех и не требует входа в Google.</p>
+          <div class="cta-actions">
+            <a class="btn btn-primary" href="mailto:support@quickradiology.com">Написать в поддержку</a>
+            <a class="btn btn-ghost" href="tel:+79112770898">+7 (911) 277-08-98</a>
+          </div>
+        </div>
+
+        <div class="contact-form" style="max-width: 900px;">
+          <iframe class="form-embed" src="https://docs.google.com/forms/d/e/1FAIpQLSd6b_kVdKfqBPFBVRikiV_cHeqMftZ4PcDy2p049ls45CBfCQ/viewform?embedded=true" title="QuickRadiology — заявка"></iframe>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="footer-inner">
+        <div class="footer-grid">
+          <div class="footer-brand">
+            <div class="footer-brand-main">
+              <img src="qr_logo_2.png" alt="QuickRadiology логотип">
+              <span class="footer-title">QuickRadiology</span>
+            </div>
+            <div class="footer-tagline">B2B-платформа для клиник: ускоряем выдачу заключений, стандартизируем качество и повышаем эффективность.</div>
+          </div>
+          <div class="footer-links-group">
+            <h4>Навигация</h4>
+            <ul>
+              <li><a href="#benefits">Преимущества</a></li>
+              <li><a href="#how">Внедрение</a></li>
+              <li><a href="#roi">Экономика</a></li>
+              <li><a href="#pricing">Тарифы</a></li>
+              <li><a href="#faq">FAQ</a></li>
+            </ul>
+          </div>
+          <div class="footer-links-group">
+            <h4>Контакты</h4>
+            <ul>
+              <li><a href="mailto:support@quickradiology.com">support@quickradiology.com</a></li>
+              <li><a href="tel:+79112770898">+7 (911) 277‑08‑98</a></li>
+              <li><a href="https://quickradiology.com" target="_blank" rel="noopener">quickradiology.com</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="legal">
+          <p>ООО «Харлин Мобайл» · ИНН 7804185925 · ОГРН 1157847058478</p>
+        </div>
+        <div class="footer-bottom">
+          <span>© 2026 QuickRadiology. Все права защищены.</span>
+          <span>Решение для медицинских центров и сетей клиник.</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    function toggleFaq(el) {
+      el.classList.toggle('active');
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          e.preventDefault();
+          target.scrollIntoView({ behavior: 'smooth' });
+        }
+      });
+    });
+
+  </script>
+</body>
+</html>
+
